@@ -1,0 +1,19 @@
+
+<QualifiedNameRoot
+	type="com.cordys.cws.namespace.qualifiedname.QualifiedNameRoot"
+	RuntimeDocumentID="0027132C-F779-11E2-E454-7717FE0D1332">
+	<DocumentID>0027132C-F779-11E2-E454-7717FE0CF332</DocumentID>
+	<Name>designtimeQNR for project</Name>
+	<Description/>
+	<CreatedBy>cordysadm</CreatedBy>
+	<CreationDate>2012-10-30T15:08:57.986</CreationDate>
+	<Notes/>
+	<DesigntimeQNRFolder>
+		<uri
+			id="0027132C-F779-11E2-E454-7717FE0B9332"
+			path="GanttChart"
+			type="com.cordys.cws.runtime.types.folder.StudioFolder"
+		/>
+	</DesigntimeQNRFolder>
+	<RuntimeQNRFolder/>
+</QualifiedNameRoot>
