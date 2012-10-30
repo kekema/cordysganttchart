@@ -23,40 +23,6 @@
 			<DependsOnJAR>?CORDYS_INSTALL_DIR?/components/wsappserver/wsappserver.jar</DependsOnJAR>
 			<ISVPName></ISVPName>
 		</JavaArchiveReferenceDependency>
-		<JavaArchiveBinaryDependency
-			type="com.cordys.cws.documenttypes.javaarchivesource.JavaArchiveBinaryDependency"
-			RuntimeDocumentID="0027132C-F779-11E2-E45A-6DEECD627332">
-			<DocumentID>0027132C-F779-11E2-E45A-6DEECD625332</DocumentID>
-			<Name>0027132C-F779-11E2-E45A-6DEECD625332</Name>
-			<Description>GanttChart_Java_External Archives_org_apache_velocity_velocity-dep.jar</Description>
-			<CreatedBy>cordysadm</CreatedBy>
-			<CreationDate>2012-10-30T21:00:47.323</CreationDate>
-			<Notes/>
-			<DependsOnJAR>
-				<uri
-					id="0027132C-F779-11E2-E45A-99021038F332"
-					path="GanttChart/Java/External Archives/org/apache/velocity/velocity-dep.jar"
-					type="com.cordys.cws.documenttypes.javaarchive.JavaArchiveBinary"
-				/>
-			</DependsOnJAR>
-		</JavaArchiveBinaryDependency>
-		<JavaArchiveBinaryDependency
-			type="com.cordys.cws.documenttypes.javaarchivesource.JavaArchiveBinaryDependency"
-			RuntimeDocumentID="0027132C-F779-11E2-E45A-6DEECD633332">
-			<DocumentID>0027132C-F779-11E2-E45A-6DEECD631332</DocumentID>
-			<Name>0027132C-F779-11E2-E45A-6DEECD631332</Name>
-			<Description>GanttChart_Java_External Archives_org_apache_poi_poi.jar</Description>
-			<CreatedBy>cordysadm</CreatedBy>
-			<CreationDate>2012-10-30T21:00:47.323</CreationDate>
-			<Notes/>
-			<DependsOnJAR>
-				<uri
-					id="0027132C-F779-11E2-E45A-990210387332"
-					path="GanttChart/Java/External Archives/org/apache/poi/poi.jar"
-					type="com.cordys.cws.documenttypes.javaarchive.JavaArchiveBinary"
-				/>
-			</DependsOnJAR>
-		</JavaArchiveBinaryDependency>
 	</Dependencies>
 	<SourceFolder>
 		<uri
