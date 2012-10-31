@@ -1,0 +1,22 @@
+
+<TranslatedText
+	type="com.cordys.translation.TranslatedText"
+	RuntimeDocumentID="0027132C-F779-11E2-E469-8866D56EB332">
+	<DocumentID>0027132C-F779-11E2-E469-8866D56E9332</DocumentID>
+	<Name>0027132C-F779-11E2-E469-8866D56E9332</Name>
+	<Description>ExampleGanttChart</Description>
+	<CreatedBy>cordysadm</CreatedBy>
+	<CreationDate>2012-10-31T11:32:09.848</CreationDate>
+	<Notes/>
+	<Text>ExampleGanttChart</Text>
+	<Language>
+		<uri
+			id="0027132C-F779-11E2-E454-7717FE0B1332"
+		/>
+	</Language>
+	<TextIdentifier>
+		<uri
+			id="0027132C-F779-11E2-E469-8866D56E5332"
+		/>
+	</TextIdentifier>
+</TranslatedText>

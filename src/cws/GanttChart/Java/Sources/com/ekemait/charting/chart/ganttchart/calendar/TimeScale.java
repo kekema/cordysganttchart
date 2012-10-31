@@ -1,14 +1,40 @@
+/*  
+ *	Copyright 2012 Ekema IT   
+ * 
+ *  This file is part of Gantt Chart Java API   
+ *   
+ *  Licensed under the Apache License, Version 2.0 (the "License");  
+ *  you may not use this file except in compliance with the License.  
+ *  You may obtain a copy of the License at  
+ *  
+ *  http://www.apache.org/licenses/LICENSE-2.0  
+ *  
+ *  Unless required by applicable law or agreed to in writing, software  
+ *  distributed under the License is distributed on an "AS IS" BASIS,  
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  
+ *  See the License for the specific language governing permissions and  
+ *  limitations under the License. 
+ */ 
+
 package com.ekemait.charting.chart.ganttchart.calendar;
 
 import java.util.Calendar;
 
+import com.ekemait.charting.chart.ganttchart.ChartConfig;
 import com.ekemait.charting.chart.ganttchart.GanttChart;
 import com.ekemait.charting.fusion.ganttchart.Categories;
 import com.ekemait.charting.fusion.ganttchart.Category;
 import com.ekemait.charting.util.Util;
 
+/**
+ * Class to define a time scale for a calendar.
+ * 
+ * @author kekema
+ * 
+ */
 public class TimeScale
 {
+	// supported time units
 	public static final int TU_DAYS = 10;
 	public static final int TU_WEEKS = 20;
 	public static final int TU_MONTHS = 30;
@@ -22,8 +48,14 @@ public class TimeScale
 		this.timeUnit = timeUnit;
 	}
 	
+	/**
+	 * Add this time scale instance to the given fusion chart
+	 * 
+	 * @param fusionGanttChart Fusion chart instance
+	 */
 	public void addToFusionGanttChart(com.ekemait.charting.fusion.ganttchart.GanttChart fusionGanttChart)
 	{
+		// take startdate and enddate as per chart calendar
 		Calendar tsStartDate = Calendar.getInstance();
 		tsStartDate.setTime(chartCalendar.getStartDate());
 		Calendar tsEndDate = Calendar.getInstance();
@@ -34,11 +66,13 @@ public class TimeScale
 		Calendar catEndDate = Calendar.getInstance();
 		
 		Categories categories = fusionGanttChart.createCategoriesNode();
-		categories.setAttribute("bgColor", "D5F0FF");
-		categories.setAttribute("fontColor", "017BBE");
+		categories.setAttribute("bgColor", ChartConfig.getValue("calendarBgColor"));
+		categories.setAttribute("fontColor", ChartConfig.getValue("calendarFontColor"));
 		
 		if (this.timeUnit == TU_DAYS)
 		{
+			// days time scale
+			// for each date, add a fusion category
 			tsCurrentDate.setTime(tsStartDate.getTime());
 			while (tsCurrentDate.getTime().getTime() <= tsEndDate.getTime().getTime())
 			{
@@ -64,6 +98,7 @@ public class TimeScale
 		}
 		else if ((this.timeUnit == TU_MONTHS) || (this.timeUnit == TU_WEEKS))
 		{
+			// month or weeks time scale 
 			tsCurrentDate.setTime(tsStartDate.getTime());
 			while (tsCurrentDate.getTime().getTime() < tsEndDate.getTime().getTime())
 			{

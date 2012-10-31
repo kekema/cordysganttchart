@@ -1,0 +1,22 @@
+
+<TranslatedText
+	type="com.cordys.translation.TranslatedText"
+	RuntimeDocumentID="0027132C-F779-11E2-E469-8866D56A9332">
+	<DocumentID>0027132C-F779-11E2-E469-8866D56A7332</DocumentID>
+	<Name>0027132C-F779-11E2-E469-8866D56A7332</Name>
+	<Description>Refresh</Description>
+	<CreatedBy>cordysadm</CreatedBy>
+	<CreationDate>2012-10-31T11:44:34.381</CreationDate>
+	<Notes/>
+	<Text>Refresh</Text>
+	<Language>
+		<uri
+			id="0027132C-F779-11E2-E454-7717FE0B1332"
+		/>
+	</Language>
+	<TextIdentifier>
+		<uri
+			id="0027132C-F779-11E2-E469-8866D56A3332"
+		/>
+	</TextIdentifier>
+</TranslatedText>

@@ -1,0 +1,327 @@
+
+<XFormDesigntime
+	type="com.cordys.xforms.XFormDesigntime"
+	typeVersion="005056C0-0008-11E0-F8FC-5E0A815B7FB8"
+	RuntimeDocumentID="0027132C-F779-11E2-E469-8866D571F332">
+	<DocumentID>0027132C-F779-11E2-E469-8866D571D332</DocumentID>
+	<Name>ExampleGanttChart</Name>
+	<Description>ExampleGanttChart</Description>
+	<CreatedBy>cordysadm</CreatedBy>
+	<CreationDate>2012-10-31T11:32:09.848</CreationDate>
+	<Notes/>
+	<XFormContent>
+		<xformhtml
+			xmlns="http://schemas.cordys.com/1.0/xform"
+			xmlns:xforms="http://www.w3.org/2002/xforms/cr"
+			xmlns:ev="http://www.w3.org/2001/xml-events"
+			xmlns:wcpforms="http://schemas.cordys.com/wcp/xforms"
+			xformsversion="2"
+			key="com/ekemait/charting/ExampleGanttChart"
+			focusatstartup="true">
+			<xhead>
+				<script
+					src="/cordys/wcp/flash/fusion/fusioncharts.js"
+				/>
+				<script
+					src="/cordys/wcp/flash/fusion/FusionChartsExportComponent.js"
+				/>
+				<xforms:model
+					id="GanttChartModel"
+					wcpforms:gateway="com.eibus.web.soap.Gateway.wcp"
+					wcpforms:automatic="false"
+					singleTransaction="false"
+					promptToSave="false"
+					isConstraintValidation="false"
+					isInitializationRequired="false"
+					isApplyAccessControl="false"
+					wcpforms:businessElement="tns:return"
+					wcpforms:nontransactional="true">
+					<xforms:instance
+						xmlns:xforms="http://www.w3.org/2002/xforms/cr"
+						xmlns:wcpforms="http://schemas.cordys.com/wcp/xforms"
+						wcpforms:timeout=""
+						wcpforms:iteratorSize="50">
+						<wcpforms:dataset
+							xmlns:wcpforms="http://schemas.cordys.com/wcp/xforms"
+							src="http://schemas.ekemait.com/charting/wsapps/1.0/GetGanttChart"
+							type="get"
+							operationName="GetGanttChart"
+							wcpforms:wsguid="0027132C-F779-11E2-E45A-82DC030F7332"
+						/>
+					</xforms:instance>
+					<wcpforms:instanceschema/>
+					<xforms:action
+						ev:event="xforms-onresponse">
+						<xforms:GanttChartModel_OnResponse/>
+					</xforms:action>
+					<wcpforms:xpathmetainfo
+						xmlns:wcpforms="http://schemas.cordys.com/wcp/xforms">
+						<wcpforms:namespace
+							prefix="xmlns">http://schemas.ekemait.com/charting/wsapps/1.0</wcpforms:namespace>
+						<wcpforms:namespace
+							prefix="tns">http://schemas.ekemait.com/charting/wsapps/1.0</wcpforms:namespace>
+					</wcpforms:xpathmetainfo>
+				</xforms:model>
+			</xhead>
+			<xbody>
+				<xforms:group
+					wcpforms:layout="vertical"
+					id="xbody_group"
+					wcpforms:labelalign="ontop">
+					<xforms:group
+						appearance="controlbox"
+						wcpforms:designLibrary="cas.xforms.designerlibrary.controls.XFormsControlbox"
+						id="controlbox1"
+						controltype="button"
+						wcpforms:layout="horizontal"
+						wcpforms:class="v_layout autoextent"
+						wcpforms:align="left_align"
+						wcpforms:size="176px auto">
+						<xforms:trigger
+							wcpforms:designLibrary="cas.xforms.designerlibrary.controls.XFormsButton"
+							id="btnRefresh"
+							wcpforms:class="h_button"
+							wcpforms:size="null 2em">
+							<xforms:label
+								textIdentifier="0027132C-F779-11E2-E469-8866D56A3332">Refresh</xforms:label>
+							<xforms:action
+								ev:event="xforms-activate">
+								<xforms:btnRefresh_Click/>
+							</xforms:action>
+						</xforms:trigger>
+					</xforms:group>
+					<div
+						xmlns="http://www.w3.org/2002/xforms/cr"
+						xformextendedname="chart"
+						id="chrtGanttchart"
+						namespace="cas.xforms.runtimelibrary.SingleSeries"
+						wcpforms:designLibrary="cas.xforms.designerlibrary.controls.extensions.SingleSeries"
+						caption="Title"
+						chartType="Column 2D"
+						xAxisCaption="X Axis Label Name"
+						yAxisCaption="Y Axis Label Name"
+						showAllRecords="1"
+						highlightActiveRecord="1"
+						yAxisMinValue="0"
+						yAxisMaxValue="100"
+						wcpforms:layout="vertical"
+						wcpforms:class="v_layout"
+						wcpforms:size="1227px 598px"
+					/>
+					<xforms:group
+						appearance="group"
+						wcpforms:designLibrary="cas.xforms.designerlibrary.controls.XFormsGroup"
+						id="fcexpDiv"
+						wcpforms:layout="vertical"
+						wcpforms:class="v_layout autoextent"
+						wcpforms:size="124px 36px"
+						wcpforms:labelalign="ontop"
+					/>
+				</xforms:group>
+			</xbody>
+			<xformsscript>
+				<![CDATA[// Example form on displaying a gantt chart with help of server-side gantt chart component
+
+var Definitions =
+{
+    NS_ALL:
+    {
+          chrt     : 'http://schemas.ekemait.com/charting/wsapps/1.0'
+    }
+}
+
+// chartXML string representation as from server response    
+var chartXML = null;
+// fusion gantt chart object
+var ganthChart = null; 
+// fusion chart exporter
+var myExportComponent = null;
+// refresh button used
+var refreshChart = false;
+
+function Form_InitDone(eventObject)
+{
+    fcexpDiv.hide();
+    // initialize chart
+    ganthChart = new FusionCharts("/cordys/wcp/flash/fusion/gadget/Gantt.swf", "mojGanttChartId", 1400, 350, 0, 1);
+    // initialize exporter
+    myExportComponent = new FusionChartsExportObject("fcExporter", "/cordys/wcp/flash/fusion/gadget/FCExporter.swf");
+    myExportComponent.componentAttributes.vMargin = 0;
+    myExportComponent.componentAttributes.btnHeight = 23;
+    myExportComponent.componentAttributes.btnWidth = 70;
+    myExportComponent.componentAttributes.btnFontSize= 12;
+    // get chart data from server
+    GanttChartModel.reset();   
+}
+
+function GanttChartModel_OnResponse(eventObject)
+{
+    // get the response XML string representation
+    var nNode = cordys.selectXMLNode(eventObject.response, ".//chrt:return/chrt:Chart/chrt:ChartXML", Definitions.NS_ALL);
+    chartXML = cordys.getTextContent(nNode);
+    // set the chart data
+    ganthChart.setDataXML(chartXML);
+    fcexpDiv.hide();
+    
+    if (!refreshChart)
+    {
+        // build the chart
+        ganthChart.setTransparent(true);
+        ganthChart.render(chrtGanttchart); 
+        myExportComponent.Render("fcexpDiv");
+    }
+}
+
+function btnRefresh_Click(eventObject)
+{
+    refreshChart = true;
+    GanttChartModel.reset();
+}
+
+function btnPDF_Click(eventObject)
+{
+    // export to PDF
+    var chartObject = getChartFromId("mojGanttChartId");
+    chartObject.exportChart( { exportAtClient: '1',  exportFormat: 'PDF' } );  
+}
+
+function FC_Exported(objRtn)
+{                        
+    if (objRtn.statusCode=="1")
+    {                                
+        fcexpDiv.hide();    } 
+    else
+    {                                
+        alert("There was an error saving the chart: " + objRtn.statusMessage);                        
+    }                
+} 
+
+function FC_ExportReady(DOMId)
+{               
+   fcexpDiv.show();
+}]]>
+			</xformsscript>
+			<xforms:action
+				ev:event="xforms-initialize-done">
+				<xforms:Form_InitDone/>
+			</xforms:action>
+		</xformhtml>
+	</XFormContent>
+	<XFormWSDL/>
+	<automatic>false</automatic>
+	<caption></caption>
+	<data/>
+	<height></height>
+	<isInternal>false</isInternal>
+	<isLegacy>false</isLegacy>
+	<left></left>
+	<mode>full</mode>
+	<parameters/>
+	<qualifiedclassname></qualifiedclassname>
+	<showOnStartPage>false</showOnStartPage>
+	<taskDescription>ExampleGanttChart</taskDescription>
+	<taskName>ExampleGanttChart</taskName>
+	<title>true</title>
+	<top></top>
+	<type>XForm</type>
+	<width></width>
+	<CompositeControls/>
+	<Htms/>
+	<Images/>
+	<InstanceSchemaFragments/>
+	<Javascripts/>
+	<ReferredXForms/>
+	<Representations/>
+	<StyleSheets/>
+	<TranslatableApplications/>
+	<TranslatableName>
+		<TranslatableText
+			type="com.cordys.translation.TranslatableText"
+			RuntimeDocumentID="0027132C-F779-11E2-E469-8866D56E3332">
+			<DocumentID>0027132C-F779-11E2-E469-8866D56E1332</DocumentID>
+			<Name>0027132C-F779-11E2-E469-8866D56E1332</Name>
+			<Description>0027132C-F779-11E2-E469-8866D56E1332</Description>
+			<CreatedBy>cordysadm</CreatedBy>
+			<CreationDate>2012-10-31T11:32:09.831</CreationDate>
+			<Notes/>
+			<Identifier>
+				<uri
+					id="0027132C-F779-11E2-E469-8866D56E5332"
+				/>
+			</Identifier>
+		</TranslatableText>
+	</TranslatableName>
+	<TranslatableUITexts>
+		<TranslatableUIText
+			type="com.cordys.xforms.TranslatableUIText"
+			RuntimeDocumentID="0027132C-F779-11E2-E469-8866D56AD332">
+			<DocumentID>0027132C-F779-11E2-E469-8866D56AB332</DocumentID>
+			<Name>0027132C-F779-11E2-E469-8866D56AB332</Name>
+			<Description>0027132C-F779-11E2-E469-8866D56AB332</Description>
+			<CreatedBy>cordysadm</CreatedBy>
+			<CreationDate>2012-10-31T11:44:34.38</CreationDate>
+			<Notes/>
+			<UIRef>btnRefresh</UIRef>
+			<TooltipText/>
+			<TranslatableName>
+				<TranslatableText
+					type="com.cordys.translation.TranslatableText"
+					RuntimeDocumentID="0027132C-F779-11E2-E469-8866D56A1332">
+					<DocumentID>0027132C-F779-11E2-E469-8866D569F332</DocumentID>
+					<Name>0027132C-F779-11E2-E469-8866D569F332</Name>
+					<Description>0027132C-F779-11E2-E469-8866D569F332</Description>
+					<CreatedBy>cordysadm</CreatedBy>
+					<CreationDate>2012-10-31T11:44:34.381</CreationDate>
+					<Notes/>
+					<Identifier>
+						<uri
+							id="0027132C-F779-11E2-E469-8866D56A3332"
+						/>
+					</Identifier>
+				</TranslatableText>
+			</TranslatableName>
+			<XForm>
+				<uri
+					id="0027132C-F779-11E2-E469-8866D571D332"
+				/>
+			</XForm>
+		</TranslatableUIText>
+	</TranslatableUITexts>
+	<Webservices/>
+	<aclFragments/>
+	<deliveryModels/>
+	<image/>
+	<input/>
+	<messageParts>
+		<MessagePart
+			type="com.cordys.task.MessagePart"
+			RuntimeDocumentID="0027132C-F779-11E2-E469-8866D56D1332">
+			<DocumentID>0027132C-F779-11E2-E469-8866D56CF332</DocumentID>
+			<Name>GanttChartModel</Name>
+			<Description>GanttChartModel</Description>
+			<CreatedBy>cordysadm</CreatedBy>
+			<CreationDate>2012-10-31T11:34:55.729</CreationDate>
+			<Notes/>
+			<isRefExists>true</isRefExists>
+			<namespace>http://schemas.ekemait.com/charting/wsapps/1.0</namespace>
+			<operationName>GetGanttChart</operationName>
+		</MessagePart>
+		<MessagePart
+			type="com.cordys.task.MessagePart"
+			RuntimeDocumentID="0027132C-F779-11E2-E469-8866D56F3332">
+			<DocumentID>0027132C-F779-11E2-E469-8866D56F1332</DocumentID>
+			<Name>freeformcontrols</Name>
+			<Description>freeformcontrols</Description>
+			<CreatedBy>cordysadm</CreatedBy>
+			<CreationDate>2012-10-31T11:32:09.847</CreationDate>
+			<Notes/>
+			<isRefExists>false</isRefExists>
+			<namespace>http://schemas.cordys.com/1.0/xforms/processapi</namespace>
+			<operationName>freeformcontrols</operationName>
+		</MessagePart>
+	</messageParts>
+	<messages/>
+	<output/>
+	<tagsContainer/>
+	<taskParts/>
+</XFormDesigntime>

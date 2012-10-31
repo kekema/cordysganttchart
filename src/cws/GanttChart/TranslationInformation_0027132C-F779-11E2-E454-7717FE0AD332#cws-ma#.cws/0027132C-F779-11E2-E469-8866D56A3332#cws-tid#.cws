@@ -1,0 +1,23 @@
+
+<TextIdentifier
+	type="com.cordys.translation.TextIdentifier"
+	typeVersion="55890f21-u239-76j6-988a-92j7opq6ws09"
+	RuntimeDocumentID="0027132C-F779-11E2-E469-8866D56A5332">
+	<DocumentID>0027132C-F779-11E2-E469-8866D56A3332</DocumentID>
+	<Name>0027132C-F779-11E2-E469-8866D56A3332</Name>
+	<Description>Refresh</Description>
+	<CreatedBy>cordysadm</CreatedBy>
+	<CreationDate>2012-10-31T11:44:34.381</CreationDate>
+	<Notes/>
+	<DefaultText>Refresh</DefaultText>
+	<TranslationInformation>
+		<uri
+			id="0027132C-F779-11E2-E454-7717FE0A9332"
+		/>
+	</TranslationInformation>
+	<Translations>
+		<uri
+			id="0027132C-F779-11E2-E469-8866D56A7332"
+		/>
+	</Translations>
+</TextIdentifier>
