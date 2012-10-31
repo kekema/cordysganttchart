@@ -1,0 +1,9 @@
+Ekema IT Charting API - cordysganttchart
+Copyright 2012 Ekema IT
+
+This product includes software developed at Ekema IT (http://www.ekema-it.com)
+
+Included are also java classes from the gwt-fusionchart library which is open source
+software under the GNU Library or Lesser General Public
+License (LGPL). This library is can be found on:
+http://code.google.com/p/gwt-fusionchart/
