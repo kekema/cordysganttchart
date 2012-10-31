@@ -1,17 +1,47 @@
+/*  
+ *	Copyright 2012 Ekema IT   
+ * 
+ *  This file is part of Gantt Chart Java API   
+ *   
+ *  Licensed under the Apache License, Version 2.0 (the "License");  
+ *  you may not use this file except in compliance with the License.  
+ *  You may obtain a copy of the License at  
+ *  
+ *  http://www.apache.org/licenses/LICENSE-2.0  
+ *  
+ *  Unless required by applicable law or agreed to in writing, software  
+ *  distributed under the License is distributed on an "AS IS" BASIS,  
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  
+ *  See the License for the specific language governing permissions and  
+ *  limitations under the License. 
+ */ 
+
 package com.ekemait.charting.chart.ganttchart.row.item;
 
 import java.util.Date;
 
+import com.ekemait.charting.chart.ganttchart.ChartConfig;
 import com.ekemait.charting.chart.ganttchart.GanttChart;
 import com.ekemait.charting.fusion.ganttchart.Milestones;
 import com.ekemait.charting.fusion.ganttchart.Tasks;
 import com.ekemait.charting.util.Util;
 
+/**
+ * Class to define an event for a gantt chart. 
+ * Event can be 'claim rejected', 'fraud detected', etc.
+ * 
+ * @author kekema
+ * 
+ */
 public class Event extends Item
 {
+	// any (internal) planned date (mostly applicable for Milestone only)
 	protected Date plannedEventDate;
+	// any external planned date (mostly applicable for Milestone only)
 	protected Date externalPlannedEventDate;
+	// actual date
 	protected Date actualEventDate;
+	// event is a milestone true/false
 	protected boolean isMilestone;
 	
 	protected Event()
@@ -19,36 +49,67 @@ public class Event extends Item
 		super();
 	}
 	
+	/**
+	 * Set planned date
+	 * 
+	 * @param plannedEventDate
+	 */
 	public void setPlannedEventDate(Date plannedEventDate)
 	{
 		this.plannedEventDate = plannedEventDate;
 	}
 	
+	/**
+	 * Get planned date
+	 * 
+	 * @return
+	 */
 	public Date getPlannedEventDate()
 	{
 		return (this.plannedEventDate);
 	}
 	
+	/**
+	 * Set external planned date
+	 * @param externalPlannedEventDate
+	 */
 	public void setExternalPlannedEventDate(Date externalPlannedEventDate)
 	{
 		this.externalPlannedEventDate = externalPlannedEventDate;
 	}
 	
+	/**
+	 * Get external planned date
+	 * @return
+	 */
 	public Date getExternalPlannedEventDate()
 	{
 		return (this.externalPlannedEventDate);
 	}
 	
+	/**
+	 * Set actual date
+	 * 
+	 * @param actualEventDate
+	 */
 	public void setActualEventDate(Date actualEventDate)
 	{
 		this.actualEventDate = actualEventDate;
 	}
 	
+	/**
+	 * Get actual date
+	 * 
+	 * @return
+	 */
 	public Date getActualEventDate()
 	{
 		return (this.actualEventDate);
 	}
 	
+	/**
+	 * Add event to the given fusion chart
+	 */
 	@Override
 	public void addToFusionGanttChart(com.ekemait.charting.fusion.ganttchart.GanttChart fcGanttChart, Tasks fcTasks, Milestones fcMilestones, int rowNumber, int itemNumber)
 	{
@@ -142,14 +203,14 @@ public class Event extends Item
 			{
 				if (external)
 				{
-					fcMilestone.setColor("017BBE");
-					fcMilestone.setAlpha("70");
+					fcMilestone.setColor(ChartConfig.getValue("plannedExternalMilestoneColor"));
+					fcMilestone.setAlpha(ChartConfig.getValue("plannedExternalMilestoneAlpha"));
 				}
 				else
 				{
-					fcMilestone.setColor("FFFFFF");
+					fcMilestone.setColor(ChartConfig.getValue("plannedMilestoneColor"));
 				}
-				fcMilestone.setBorderColor("575757");
+				fcMilestone.setBorderColor(ChartConfig.getValue("plannedMilestoneBorderColor"));
 			}
 		}
 		else

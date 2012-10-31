@@ -1,12 +1,37 @@
+/*  
+ *	Copyright 2012 Ekema IT   
+ * 
+ *  This file is part of Gantt Chart Java API   
+ *   
+ *  Licensed under the Apache License, Version 2.0 (the "License");  
+ *  you may not use this file except in compliance with the License.  
+ *  You may obtain a copy of the License at  
+ *  
+ *  http://www.apache.org/licenses/LICENSE-2.0  
+ *  
+ *  Unless required by applicable law or agreed to in writing, software  
+ *  distributed under the License is distributed on an "AS IS" BASIS,  
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  
+ *  See the License for the specific language governing permissions and  
+ *  limitations under the License. 
+ */ 
+
 package com.ekemait.charting.chart.ganttchart.row.item;
 
 import java.util.Date;
 
+import com.ekemait.charting.chart.ganttchart.ChartConfig;
 import com.ekemait.charting.chart.ganttchart.GanttChart;
 import com.ekemait.charting.fusion.ganttchart.Milestones;
 import com.ekemait.charting.fusion.ganttchart.Tasks;
 import com.ekemait.charting.util.Util;
 
+/**
+ * Class to define a task for a gantt chart.
+ * 
+ * @author kekema
+ * 
+ */
 public class Task extends Item
 {
 	private boolean isSummaryTask;
@@ -20,56 +45,109 @@ public class Task extends Item
 		super();
 	}
 	
+	/**
+	 * Set whether task is a summary task
+	 * 
+	 * @param isSummaryTask
+	 */
 	public void setIsSummaryTask(boolean isSummaryTask)
 	{
 		this.isSummaryTask = isSummaryTask;
 	}
 	
+	/**
+	 * Get whether task is a summary task
+	 * 
+	 * @return
+	 */
 	public boolean getIsSummaryTask()
 	{
 		return (this.isSummaryTask);
 	}
 	
+	/**
+	 * Set planned start date
+	 * 
+	 * @param plannedStartDate
+	 */
 	public void setPlannedStartDate(Date plannedStartDate)
 	{
 		this.plannedStartDate = plannedStartDate;
 	}
 	
+	/**
+	 * Get planned start date
+	 * 
+	 * @return
+	 */
 	public Date getPlannedStartDate()
 	{
 		return (this.plannedStartDate);
 	}
 	
+	/**
+	 * Set planned end date
+	 * 
+	 * @param plannedEndDate
+	 */
 	public void setPlannedEndDate(Date plannedEndDate)
 	{
 		this.plannedEndDate = plannedEndDate;
 	}
 	
+	/**
+	 * Get planned end date
+	 * 
+	 * @return
+	 */
 	public Date getPlannedEndDate()
 	{
 		return (this.plannedEndDate);
 	}
 	
+	/**
+	 * Set actual start date
+	 * 
+	 * @param actualStartDate
+	 */
 	public void setActualStartDate(Date actualStartDate)
 	{
 		this.actualStartDate = actualStartDate;
 	}
 	
+	/**
+	 * Get actual start date
+	 * 
+	 * @return
+	 */
 	public Date getActualStartDate()
 	{
 		return (this.actualStartDate);
 	}
 	
+	/**
+	 * Set actual end date
+	 * 
+	 * @param actualEndDate
+	 */
 	public void setActualEndDate(Date actualEndDate)
 	{
 		this.actualEndDate = actualEndDate;
 	}
 	
+	/**
+	 * Get actual end date
+	 * 
+	 * @return
+	 */
 	public Date getActualEndDate()
 	{
 		return (this.actualEndDate);
 	}
 	
+	/**
+	 * Add the task to the given fusion chart
+	 */
 	@Override
 	public void addToFusionGanttChart(com.ekemait.charting.fusion.ganttchart.GanttChart fcGanttChart, Tasks fcTasks, Milestones fcMilestones, int rowNumber, int itemNumber)
 	{
@@ -136,11 +214,11 @@ public class Task extends Item
 			fcTask.setShowAsGroup("1");
 			fcTask.setTopPadding("25%");
 			fcTask.setHeight("60%");
-			fcTask.setColor("017BBE");
+			fcTask.setColor(ChartConfig.getValue("summaryTaskColor"));
 		}
 		else
 		{
-			fcTask.setColor("D5F0FF");
+			fcTask.setColor(ChartConfig.getValue("taskColor"));
 		}
 		if (duo)
 		{

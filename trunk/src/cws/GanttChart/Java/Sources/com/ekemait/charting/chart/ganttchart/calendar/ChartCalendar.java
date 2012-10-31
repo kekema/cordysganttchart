@@ -1,3 +1,21 @@
+/*  
+ *	Copyright 2012 Ekema IT   
+ * 
+ *  This file is part of Gantt Chart Java API   
+ *   
+ *  Licensed under the Apache License, Version 2.0 (the "License");  
+ *  you may not use this file except in compliance with the License.  
+ *  You may obtain a copy of the License at  
+ *  
+ *  http://www.apache.org/licenses/LICENSE-2.0  
+ *  
+ *  Unless required by applicable law or agreed to in writing, software  
+ *  distributed under the License is distributed on an "AS IS" BASIS,  
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  
+ *  See the License for the specific language governing permissions and  
+ *  limitations under the License. 
+ */ 
+
 package com.ekemait.charting.chart.ganttchart.calendar;
 
 import java.util.ArrayList;
@@ -5,18 +23,30 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import com.ekemait.charting.chart.ganttchart.ChartConfig;
 import com.ekemait.charting.chart.ganttchart.GanttChart;
 import com.ekemait.charting.fusion.ganttchart.Line;
 import com.ekemait.charting.fusion.ganttchart.Trendlines;
 import com.ekemait.charting.util.Util;
 
+/**
+ * Class to define a calendar for a gantt chart. It enables to define 1 or more time scales (days, weeks and/or months).
+ * In addition, the non-workable days can be specified.
+ * 
+ * @author kekema
+ * 
+ */
 public class ChartCalendar
 {
 	private final static String NW_DATE_FORMAT = "dd/MM/yyyy";
+	// start date of calendar
 	private Date startDate;
+	// end date of calendar
 	private Date endDate;
 	
+	// non workable days every week
 	private List<Integer> nonWorkableDaysOfWeek = new ArrayList<Integer>();
+	// additional specific non workable dates
 	private List<String> nonWorkableDates = new ArrayList<String>();
 	
     /**
@@ -24,21 +54,37 @@ public class ChartCalendar
      */
 	private final List<TimeScale> timeScaleChildren = new ArrayList<TimeScale>();
 	
+	/**
+	 * Get the calendar start date
+	 */
 	public Date getStartDate()
 	{
 		return (this.startDate);
 	}
 	
+	/**
+	 * Set the calendar start date
+	 * 
+	 * @param startDate
+	 */
 	public void setStartDate(Date startDate)
 	{
 		this.startDate = Util.startOfDay(startDate);
 	}
 	
+	/**
+	 * Get the calendar end date
+	 */
 	public Date getEndDate()
 	{
 		return (this.endDate);
 	}
 	
+	/**
+	 * Set the calendar end date
+	 * 
+	 * @param endDate
+	 */
 	public void setEndDate(Date endDate)
 	{
 		this.endDate = Util.endOfDay(endDate);
@@ -58,6 +104,11 @@ public class ChartCalendar
 		}
 	}
 	
+	/**
+	 * Mark a specific date as non-workable.
+	 * 
+	 * @param nonWorkableDate
+	 */
 	public void setNonWorkableDate(Date nonWorkableDate)
 	{
 		String formattedDate = Util.formatDate(nonWorkableDate, NW_DATE_FORMAT);
@@ -69,7 +120,8 @@ public class ChartCalendar
 	
     /**
      * Create a time scale.
-     * @param timeUnit 
+     * 
+     * @param timeUnit (TimeScale.TU_DAYS, TimeScale.TU_WEEKS or TimeScale.TU_MONTHS)
      */
 	public TimeScale createTimeScale(int timeUnit)
 	{
@@ -78,6 +130,11 @@ public class ChartCalendar
 		return timeScale;
 	}
 	
+    /**
+     * Add this calendar instance to a fusion gantt chart
+     * 
+     * @param fusionGanttChart Fusion chart instance
+     */
 	public void addToFusionGanttChart(com.ekemait.charting.fusion.ganttchart.GanttChart fusionGanttChart)
 	{
 		// time scales
@@ -102,9 +159,8 @@ public class ChartCalendar
 			if (isNonWorkable(currentDate))
 			{
 				Line line = trendLinesNode.createLineNode();
-				line.setIsTrendZone("1");
-				line.setColor("FFCC7F"); // initially it was FF5904
-				// line.setAlpha("20"); // using alpha 20, it got to light
+				line.setIsTrendZone("1"); 
+				line.setColor(ChartConfig.getValue("nonWorkableDayColor")); 
 				line.setDisplayValue(" ");
 				Calendar startInterval = Calendar.getInstance();
 				startInterval.setTime(currentDate.getTime());
