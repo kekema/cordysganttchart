@@ -218,7 +218,7 @@ function FC_ExportReady(DOMId)
 	<mode>full</mode>
 	<parameters/>
 	<qualifiedclassname></qualifiedclassname>
-	<showOnStartPage>false</showOnStartPage>
+	<showOnStartPage>true</showOnStartPage>
 	<taskDescription>ExampleGanttChart</taskDescription>
 	<taskName>ExampleGanttChart</taskName>
 	<title>true</title>
