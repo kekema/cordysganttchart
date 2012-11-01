@@ -1,0 +1,33 @@
+
+<RoleDesignTime
+	type="com.cordys.organization.role.RoleDesignTime"
+	RuntimeDocumentID="0027132C-F779-11E2-E485-B64E286BD302">
+	<DocumentID>0027132C-F779-11E2-E485-B64E286BB302</DocumentID>
+	<Name>Chart Tester</Name>
+	<Description>Chart Tester</Description>
+	<CreatedBy>cordysadm</CreatedBy>
+	<CreationDate>2012-11-01T14:10:36.891</CreationDate>
+	<Notes/>
+	<DistinguishedName>cn=#roleName#, cn=#ISVPName#, #LDAPRoot#</DistinguishedName>
+	<isFunctionalRole>true</isFunctionalRole>
+	<type>Functional</type>
+	<Subroles/>
+	<configuredTasks>
+		<ConfiguredTask
+			type="com.cordys.task.ConfiguredTask"
+			RuntimeDocumentID="0027132C-F779-11E2-E485-B64E286AD302">
+			<DocumentID>0027132C-F779-11E2-E485-B64E286AB302</DocumentID>
+			<Name>ExampleGanttChart_0027132C-F779-11E2-E485-B64E286AB302</Name>
+			<Description>ExampleGanttChart_0027132C-F779-11E2-E485-B64E286AB302</Description>
+			<CreatedBy>cordysadm</CreatedBy>
+			<CreationDate>2012-11-01T14:10:54.082</CreationDate>
+			<Notes/>
+			<configuredTaskParts/>
+			<uiTask>
+				<uri
+					id="0027132C-F779-11E2-E469-8866D571D332"
+				/>
+			</uiTask>
+		</ConfiguredTask>
+	</configuredTasks>
+</RoleDesignTime>

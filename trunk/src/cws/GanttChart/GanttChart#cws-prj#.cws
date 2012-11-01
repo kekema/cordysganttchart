@@ -20,8 +20,8 @@
 			<CreatedBy>cordysadm</CreatedBy>
 			<CreationDate>2012-10-30T15:08:57.987</CreationDate>
 			<Notes/>
-			<BuildNumber>0</BuildNumber>
-			<ISVPackageFileName>EkemaIT GanttChart 1.0.0</ISVPackageFileName>
+			<BuildNumber>1</BuildNumber>
+			<ISVPackageFileName>EkemaIT GanttChart 1.0.1</ISVPackageFileName>
 			<ISVPackageOwner>EkemaIT</ISVPackageOwner>
 			<PackageForRuntime>true</PackageForRuntime>
 			<PostISVLoaderInformation/>
