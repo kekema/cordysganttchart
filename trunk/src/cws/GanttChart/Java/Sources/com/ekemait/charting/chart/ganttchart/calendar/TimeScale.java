@@ -114,7 +114,14 @@ public class TimeScale
 				else
 				{
 					// weeks
+					Calendar saveDate = (Calendar)tsCurrentDate.clone();
 					tsCurrentDate.set(Calendar.DAY_OF_WEEK, tsCurrentDate.getActualMaximum(Calendar.DAY_OF_WEEK));
+					// 09-dec-2013: encountered a situation in which tsCurrentDate.get(Calendar.DAY_OF_WEEK) gave 1, but setting the day to the max day of week (7) resulted
+					// in the date being set to the last day in previous week. Unclear why. Resolved by adding below if statement.
+					if (tsCurrentDate.getTime().getTime() < saveDate.getTime().getTime())
+					{
+						tsCurrentDate.add(Calendar.DAY_OF_WEEK, 7);
+					}
 				}
 				tsCurrentDate.set(Calendar.HOUR_OF_DAY, 23);
 				tsCurrentDate.set(Calendar.MINUTE, 59);
